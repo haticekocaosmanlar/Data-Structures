@@ -29,12 +29,12 @@ def findFactorialIterative(number):  #O(n)
 # For example: fibonacciRecursive(6) should return 8
 
 
-def fibonacciIterative(n):  #O(n)
+def fibonacciRecursive(n):  #O(2^n)
     if (n==0 or n==1):
         return n
-    return fibonacciIterative(n-1)+fibonacciIterative(n-2)
+    return fibonacciRecursive(n-1)+fibonacciRecursive(n-2)
 
-def fibonacciRecursive(n): 
+def fibonacciIterative(n): 
     # O(2^n) - this is exponenial time. Size of the tree exponentionally grows when n increases. Every addional element in the fibonacci sequance we get a increase in function calls exponentionally.
     if (n==0 or n==1):
         return n
