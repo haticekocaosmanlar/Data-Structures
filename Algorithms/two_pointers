@@ -89,3 +89,40 @@ def three_sum(nums):
         while low < high and nums[high] == nums[high + 1]:
             high -= 1
   return result
+
+# Time Complexity: O(n^2) — for each element, we scan the rest with two pointers.
+# Space Complexity: O(1) (excluding output), since we sort in-place and use no extra space beyond the result list.
+
+# REMOVE NTH NODE FROM END OF THE LIST
+# --------------------------------------------------------------------------------------------------
+# Definition for a Linked List node
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+from ds_v1.LinkedList.LinkedList import ListNode
+
+def remove_nth_last_node(head, n):
+    dummy = ListNode(0, head)
+    fast = slow = dummy
+    
+    # The fast pointer is moved n + 1 steps ahead (since there is dummy head). 
+    # This ensures that the distance between the fast and slow pointers is n.
+    for i in range(n+1):
+        fast = fast.next
+    
+    # Remove Nth Node from End of List
+    while fast:
+        fast = fast.next
+        slow = slow.next
+    
+    # Remove    
+    slow.next = slow.next.next
+    
+    # Return the linkedlist
+    return dummy.next
+
+# Time Complexity: O(L), where L is the length of the linked list. We traverse the list at most twice (once with the fast pointer and once with the slow pointer).
+# Space Complexity: O(1), as we use only a few pointers for traversal (no extra data structures).
+
+
