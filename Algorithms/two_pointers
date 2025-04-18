@@ -1,0 +1,56 @@
+# -------------------------------------------------
+# Reverse strign solution
+def is_palindrome(s):
+  # Keep only alphanumeric characters and convert to lowercase
+  cleaned = ''.join(char.lower() for char in s if char.isalnum())
+  # Check if the cleaned string is a palindrome
+  return cleaned == cleaned[::-1]
+
+# Time Complexity: O(n)
+# Let's break it down:
+# Cleaning the string:
+# Loop through each character in s: O(n)
+# char.lower() and char.isalnum() are both O(1)
+# Building a new string with ''.join(...): also O(n)
+# Reversing and comparing:
+# cleaned[::-1] creates a reversed copy → O(n)
+# Comparing two strings of length n: O(n)
+# So total time: O(n) + O(n) + O(n) = O(n)
+
+# Space Complexity: O(n)
+# cleaned holds a new string up to length n
+# cleaned[::-1] creates another copy of that string
+# So total space:O(n)
+
+# -------------------------------------------------
+# Two pointers solution 
+def is_palindrome(s):
+  i, j = 0, len(s) - 1
+
+  while i < j:
+      # Move left pointer until it points to an alphanumeric character
+      while i < j and not s[i].isalnum():
+          i += 1
+      # Move right pointer until it points to an alphanumeric character
+      while i < j and not s[j].isalnum():
+          j -= 1
+
+      # Compare the characters in lowercase
+      if s[i].lower() != s[j].lower():
+          return False
+
+      # Move both pointers inward
+      i += 1
+      j -= 1
+  return True
+
+# Time Complexity: O(n)
+# n is the length of the input string.
+# Each character is visited at most once by either the left or right pointer.
+# Even the inner while loops (that skip non-alphanumeric characters) only advance the pointers forward, never backward.
+# So in total: linear time, O(n).
+
+# Space Complexity: O(1)
+# No additional data structures or copies of the string are created.
+# Only a few integer variables (left, right) and temporary chars are used.
+# So: constant space, O(1).
