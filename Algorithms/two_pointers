@@ -1,4 +1,5 @@
-# -------------------------------------------------
+# PALINDROME
+# --------------------------------------------------------------------------------------------------
 # Reverse strign solution
 def is_palindrome(s):
   # Keep only alphanumeric characters and convert to lowercase
@@ -22,7 +23,7 @@ def is_palindrome(s):
 # cleaned[::-1] creates another copy of that string
 # So total space:O(n)
 
-# -------------------------------------------------
+# ---
 # Two pointers solution 
 def is_palindrome(s):
   i, j = 0, len(s) - 1
@@ -54,3 +55,37 @@ def is_palindrome(s):
 # No additional data structures or copies of the string are created.
 # Only a few integer variables (left, right) and temporary chars are used.
 # So: constant space, O(1).
+
+
+# 3SUM
+# --------------------------------------------------------------------------------------------------
+def three_sum(nums):
+  nums.sort()
+  result = []
+
+  for pivot in range(len(nums) - 2):
+    if nums[pivot] > 0:
+      break
+    
+    # TODO: Skip duplicate pivots to avoid repeated triplets
+    if pivot > 0 and nums[pivot] == nums[pivot - 1]:
+        continue
+    
+    low, high = pivot + 1, len(nums) - 1
+    while low < high:
+      total = nums[pivot] + nums[low] + nums[high]
+      if total < 0:
+        low += 1
+      elif total > 0:
+        high -= 1
+      else:
+        # Found a triplet
+        result.append([nums[pivot], nums[low], nums[high]])
+        low += 1
+        high -= 1
+        # Skip duplicates for low and high
+        while low < high and nums[low] == nums[low - 1]:
+            low += 1
+        while low < high and nums[high] == nums[high + 1]:
+            high -= 1
+  return result
